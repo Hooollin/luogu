@@ -1,5 +1,5 @@
 //
-// P1101.cpp 
+// P1101.cpp
 // Created by Hollin on 7/31/2020
 //
 
@@ -12,43 +12,59 @@ const int dirs[8][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, -1}, {1, 
 char mat[maxn][maxn];
 bool res[maxn][maxn];
 
-bool dfs(int x, int y, int dx, int dy, int k, int n){
-    if(k == word.size()){
+bool dfs(int x, int y, int dx, int dy, int k, int n)
+{
+    if (k == word.size())
+    {
         return true;
     }
-    if(x < 0 || x >= n || y < 0 || y >= n || mat[x][y] != word[k]){
+    if (x < 0 || x >= n || y < 0 || y >= n || mat[x][y] != word[k])
+    {
         return false;
     }
-    if(dfs(x + dx, y + dy, dx, dy, k + 1, n)){
+    if (dfs(x + dx, y + dy, dx, dy, k + 1, n))
+    {
         res[x][y] = true;
         return true;
     }
     return false;
 }
 
-int main(){
+int main()
+{
     int n;
     cin >> n;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
             cin >> mat[i][j];
         }
     }
     memset(res, 0, sizeof(res));
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            if(mat[i][j] == 'y'){
-                for(auto p : dirs){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (mat[i][j] == 'y')
+            {
+                for (auto p : dirs)
+                {
                     dfs(i, j, p[0], p[1], 0, n);
                 }
             }
         }
     }
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            if(res[i][j]){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (res[i][j])
+            {
                 cout << mat[i][j];
-            }else{
+            }
+            else
+            {
                 cout << "*";
             }
         }
