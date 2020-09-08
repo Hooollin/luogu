@@ -4,3 +4,4 @@ cmake-build-debug
 test.cpp
 uestc.cpp
 *.out
+*.swp
