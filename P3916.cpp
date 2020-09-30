@@ -8,15 +8,13 @@ int p[maxn];
 vector<vector<int>> g(maxn, vector<int>());
 bool vis[maxn];
 
-int dfs(int now){
-	if(vis[now]){
-		return p[now];
-	}
-	vis[now] = true;
+void dfs(int now, int val){
+	if(vis[now]) return;
+	vis[now] = 1;
+	p[now] = val;
 	for(auto nxt : g[now]){
-		p[now] = max(dfs(nxt), p[nxt]);
+		dfs(nxt, val);
 	}
-	return p[now];
 }
 
 int main(){
@@ -29,13 +27,10 @@ int main(){
 	for(int i = 0; i < m; i++){
 		int x, y;
 		cin >> x >> y;
-		g[x].push_back(y);
+		g[y].push_back(x);
 	}
-	for(int i = 1; i <= n; i++){
-		if(vis[i]){
-			continue;
-		}
-		dfs(i);
+	for(int i = n; i >= 1; i--){
+		dfs(i, i);
 	}
 	for(int i = 1; i <= n; i++){
 		cout << p[i] << " ";
